@@ -9,13 +9,13 @@ import lejos.nxt.UltrasonicSensor;
 public class UltrasonicPoller extends Thread {
 	private UltrasonicSensor sensor;
 	private int usDist;
-	private static final long UPDATE_PERIOD = 20;
+	private static final long UPDATE_PERIOD = 10;
 	
-	/**Ultrasonic Controller takes a ultrasonic sensor, and collects data from it.
-	 * @param port 		The Ultrasonic sensor which will be polled.
+	/**Ultrasonic Controller takes a sensor port, and initializes the local US
+	 * @param port 		The SensorPort which has the ultrasonic sensor attached.
 	 */
-	public UltrasonicPoller(UltrasonicSensor us){
-		sensor = us;
+	public UltrasonicPoller(SensorPort port){
+		sensor = new UltrasonicSensor(port);
 	}
 	
 	/** Returns the distances stored in the poller
