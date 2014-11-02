@@ -1,4 +1,4 @@
-import lejos.nxt.NXTRegulatedMotor;
+import lejos.nxt.Motor;
 
 /**Controls the motors for the wheels
  * 

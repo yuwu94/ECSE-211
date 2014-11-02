@@ -22,19 +22,15 @@ public class Week3Demo {
 				&& buttonChoice != Button.ID_RIGHT);
 
 		if (buttonChoice == Button.ID_LEFT) {
-			NXTRegulatedMotor ClawMotor = Motor.C;
-			ClawMotor.flt();
-			LCD.clear();
-			while(true){
-				LCD.drawString("Claw Tachometer", 0, 0);
-				LCD.drawInt(ClawMotor.getTachoCount(), 0, 1);
-				if(Button.waitForAnyPress() == Button.ID_ESCAPE){
-					break;
-				}
+			for (NXTRegulatedMotor motor : new NXTRegulatedMotor[] { Motor.A, Motor.B, Motor.C }) {
+				motor.forward();
+				motor.flt();
 			}
 
-
+			// start only the odometer and the odometry display
 		} else {
+			// start the odometer, the odometry display and (possibly) the
+			// odometry correction
 
 			// spawn a new Thread to avoid SquareDriver.drive() from blocking
 			(new Thread() {
