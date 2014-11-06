@@ -1,0 +1,17 @@
+
+public class UltrasonicController {
+	private UltrasonicPoller poller;
+	private int distance;
+	
+	public UltrasonicController(UltrasonicPoller p){
+		this.poller = p;
+	}
+	
+	public int getFilteredDist(){
+		int unfilteredDist = poller.getDist();
+		
+		//Filter Code Here
+		
+		return distance;
+	}
+}

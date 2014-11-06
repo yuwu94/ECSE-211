@@ -1,0 +1,8 @@
+
+public class UltrasonicController {
+	private UltrasonicPoller poller;
+	
+	public UltrasonicController(){
+		
+	}
+}
