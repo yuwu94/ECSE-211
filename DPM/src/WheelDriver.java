@@ -6,6 +6,7 @@ import lejos.nxt.NXTRegulatedMotor;
  * @author Daniel
  * yyolo
  * richard is here
+ * wei is here
  */
 public class WheelDriver {
 	private NXTRegulatedMotor leftMotor,rightMotor;
