@@ -43,16 +43,24 @@ public class Navigation extends Thread{
 		
 	}
 	
+	//travel to 25 cm at right angle to obstruction, then 25 cm to right angle, then should go back to original wayoint
+	public void avoid(){
+		update();
+		double avoidX = this.x + (25*Math.cos(this.theta));
+		double avoidY = this.y - (25*Math.sin(this.theta));
+		double secondX = avoidX - (25*Math.cos(this.theta + Math.PI/2));
+		double secondY = avoidY + (25*Math.sin(this.theta + Math.PI/2));
+		waypoints.push(new Waypoint(secondX,secondY));
+		waypoints.push(new Waypoint(avoidX,avoidY));
+	}
 	
 	//Constructor, takes a list of waypoints as parameter
-	public Navigation(double x, double y, Odometer odometer, ArrayList<Waypoint> points, WheelDriver driver){
+	public Navigation(double x, double y, Odometer odometer, ArrayList<Waypoint> points){
 		this.x = x;
 		this.y = y;
 		theta = 0;
 		waypoints = new Stack<Waypoint>();
 		usensor = new UltrasonicSensor(SensorPort.S1);
-		
-		this.driver = driver;
 		
 		//pushes waypoints onto stack (will be called in REVERSE ORDER)
 		for(Waypoint w : points){
@@ -130,6 +138,12 @@ public class Navigation extends Thread{
 			driver.setSpeed(200,200);
 			update();
 			
+			//pushes this waypoint back onto the stack and breaks from loop
+			if(usensor.getDistance() <= 10){
+				waypoints.push(point);
+				break;
+			}
+			
 			destinationAngle = getAngle(point.getX(),point.getY());
 			if(Math.abs(destinationAngle - this.theta) > 0.1 && Math.abs(destinationAngle - this.theta) < Math.PI/2){
 				turnTo(destinationAngle);
@@ -193,6 +207,10 @@ public class Navigation extends Thread{
 				break;
 			}
 			travelTo(waypoints.peek());
+			
+			if(usensor.getDistance() <= 10){
+				avoid();
+			}
 			if(!waypoints.isEmpty()){
 				navigating = true;
 			}

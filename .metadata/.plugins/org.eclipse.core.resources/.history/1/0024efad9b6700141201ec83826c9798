@@ -45,14 +45,12 @@ public class Navigation extends Thread{
 	
 	
 	//Constructor, takes a list of waypoints as parameter
-	public Navigation(double x, double y, Odometer odometer, ArrayList<Waypoint> points, WheelDriver driver){
+	public Navigation(double x, double y, Odometer odometer, ArrayList<Waypoint> points){
 		this.x = x;
 		this.y = y;
 		theta = 0;
 		waypoints = new Stack<Waypoint>();
 		usensor = new UltrasonicSensor(SensorPort.S1);
-		
-		this.driver = driver;
 		
 		//pushes waypoints onto stack (will be called in REVERSE ORDER)
 		for(Waypoint w : points){
