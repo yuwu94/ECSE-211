@@ -16,7 +16,7 @@ public class LightSensorController {
 	 * 
 	 * @return the filtered distance from the ultrasonic sensor
 	 */
-	public int getFilteredVal(){
+	public int getFilteredDist(){
 		int unfilteredVal = poller.getLight();
 		
 		//Filter Code Here

@@ -67,40 +67,11 @@ public class OdometryCorrection extends Thread{
 			//Right sensor passes first
 			if(right.getFilteredVal() > LINE){
 				yLast = odo.getY();
-				xLast = odo.getX();
 				
-				//Wait for left Sensor
-				while(true){
-					if(left.getFilteredVal() > LINE){
-						y = odo.getY();
-						x = odo.getX();
-						
-						double newTheta = calculate(true);
-						
-						odo.setTheta(getNewTheta(newTheta));
-						
-						break;
-					}
-				}		
-			}
-			//Left Sensor passes first
-			if(left.getFilteredVal() > LINE){
-				yLast = odo.getY();
-				xLast = odo.getX();
 				
-				//Wait for right Sensor
 				while(true){
-					if(right.getFilteredVal() > LINE){
-						y = odo.getY();
-						x = odo.getX();
-						
-						double newTheta = calculate(false);
-						
-						odo.setTheta(getNewTheta(newTheta));
-						
-						break;
-					}
-				}		
+					
+				}
 			}
 		}
 	}

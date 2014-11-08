@@ -1,0 +1,38 @@
+
+public class OdometryCorrection extends Thread{
+	private Odometer odo;
+	
+	private LightSensorController right,left;
+	
+	private static final int WIDTH = 3;
+	
+	private static final int LINE = 50;
+	
+	private static final int PERIOD = 500;
+	
+	private double xLast,yLast;
+	
+	private double x,y;
+	
+	
+	
+	public OdometryCorrection(Odometer odo, LightSensorController right, LightSensorController left){
+		this.odo = odo;
+		this.right = right;
+		this.left = left;
+	}
+	
+	public double calculate(boolean right){
+		 double result = odo.getTheta();
+		 return result;
+	}
+	
+	public double getNewTheta(double theta){
+		return theta;
+	}
+	
+	public void run(){
+	
+	}
+	
+}
