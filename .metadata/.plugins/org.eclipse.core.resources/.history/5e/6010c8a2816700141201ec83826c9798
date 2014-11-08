@@ -187,12 +187,4 @@ public class Odometer extends Thread {
 			this.theta = theta;
 		}
 	}
-	
-	public int getLeft(){
-		return Motor.A.getTachoCount();
-	}
-	
-	public int getRight(){
-		return Motor.B.getTachoCount();
-	}
 }

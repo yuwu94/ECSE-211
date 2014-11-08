@@ -1,0 +1,10 @@
+
+public class OdometryCorrection extends Thread{
+	private Odometer odo;
+	
+	private static final int WIDTH = 3;
+	
+	public OdometryCorrection(Odometer odo){
+		this.odo = odo;
+	}
+}

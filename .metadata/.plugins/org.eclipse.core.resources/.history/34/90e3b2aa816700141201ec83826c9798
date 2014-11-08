@@ -193,6 +193,6 @@ public class Odometer extends Thread {
 	}
 	
 	public int getRight(){
-		return Motor.B.getTachoCount();
+		return Motor.B,getTachoCount();
 	}
 }

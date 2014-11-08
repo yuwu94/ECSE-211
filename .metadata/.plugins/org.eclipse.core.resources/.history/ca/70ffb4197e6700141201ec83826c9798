@@ -35,7 +35,6 @@ public class GridSquare {
 	
 	public ArrayList<GridSquare> getSquares(){
 		return new ArrayList<GridSquare>();
-		//TODO
 	}
 	
 }
