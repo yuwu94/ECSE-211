@@ -1,3 +1,4 @@
+import lejos.nxt.Motor;
 import lejos.nxt.NXTRegulatedMotor;
 
 /**Controls the motors for the wheels
@@ -14,6 +15,32 @@ public class WheelDriver {
 	public WheelDriver(NXTRegulatedMotor left, NXTRegulatedMotor right){
 		this.leftMotor = left;
 		this.rightMotor = right;
+	}
+	
+	public void setSpeed(int left, int right){
+		if(left == 0){
+			Motor.A.stop();
+		}
+		else if(left > 0){
+			Motor.A.forward();
+			Motor.A.setSpeed(left);
+		}
+		else{
+			Motor.A.backward();
+			Motor.A.setSpeed(Math.abs(left));
+		}
+		
+		if(right == 0){
+			Motor.B.stop();
+		}
+		else if(right > 0){
+			Motor.B.forward();
+			Motor.B.setSpeed(left);
+		}
+		else{
+			Motor.B.backward();
+			Motor.B.setSpeed(Math.abs(right));
+		}
 	}
 	
 	
