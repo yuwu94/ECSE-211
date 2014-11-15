@@ -1,8 +1,0 @@
-
-public class UltrasonicController {
-	private int poller;
-	
-	public UltrasonicController(UltrasonicPoller){
-		
-	}
-}
