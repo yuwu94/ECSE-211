@@ -22,15 +22,14 @@ public class Odometer extends Thread {
 	// lock object for mutual exclusion
 	private Object lock;
 	
-	private int lastTachoLeft,  lastTachoRight;
+	private int lastTachoLeft,  lastTachoRight, nowTachoL, nowTachoR;
+	private double rightArcLength, leftArcLength, deltaTheta, deltaArcLength;
 
 	// default constructor
 	/**Initializes an Odometer with starting position at [0,0], heading 0
 	 * 
 	 */
 	public Odometer() {
-		lastTachoLeft = Motor.A.getTachoCount();
-		lastTachoRight = Motor.B.getTachoCount();
 		x = 0.0;
 		y = 0.0;
 		theta = 0.0;
@@ -43,27 +42,34 @@ public class Odometer extends Thread {
 
 		while (true) {
 			updateStart = System.currentTimeMillis();
-			//Get tachometer readings
-			int tachoLeft = Motor.A.getTachoCount();
-			int tachoRight = Motor.B.getTachoCount();
-			
-			//calculate wheel distance as per lecture notes
-			double distanceLeft = Math.PI * 2 * (tachoLeft - lastTachoLeft)/ 180;
-			double distanceRight = Math.PI * 2 * (tachoRight - lastTachoRight)/ 180;
-			
-			lastTachoLeft = tachoLeft;
-			lastTachoRight = tachoRight;
-			
-			//get delta Distance and Delta theta as per lecture notes
-			double delD = 0.5 * (distanceLeft + distanceRight);
-			double delT = (distanceLeft - distanceRight)/(15.24);
-			
+			// put (some of) your odometer code here
+
+			//define the new tacho count
+			nowTachoL = Motor.A.getTachoCount();
+			nowTachoR = Motor.B.getTachoCount();
+
+			//difference between the previous tacho count and the current one
+			int differenceTachoL = nowTachoL - lastTachoL;
+			int differenceTachoR = nowTachoR - lastTachoR;
+
+			//set the current tacho to the previous tacho count
+			lastTachoL = Motor.A.getTachoCount();
+			lastTachoR = Motor.B.getTachoCount();
+
+			//calculate the arc length traveled by each wheel
+			leftArcLength = ((differenceTachoL * 2 * Math.PI) /360) * 2.12;
+			rightArcLength = ((differenceTachoR * 2 * Math.PI) / 360) * 2.12;
+
+			//determine the change in angle and arc length
+			deltaTheta = (leftArcLength - rightArcLength) / 10.3;
+			deltaArcLength = (leftArcLength + rightArcLength) / 2;
+
 			synchronized (lock) {
-				//update the stored x,y, and theta values
-				x = x + delD*Math.sin(theta);
-				y = y + delD*Math.cos(theta);
-				
-				theta += delT;
+				// don't use the variables x, y, or theta anywhere but here!
+				//calculations based on tutorial slides
+				x = x + deltaArcLength * Math.sin(theta + (deltaTheta / 2));
+				y = y + deltaArcLength * Math.cos(theta + (deltaTheta / 2));
+				theta = theta + deltaTheta;
 			}
 
 			// this ensures that the odometer only runs once every period
