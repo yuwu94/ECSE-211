@@ -22,8 +22,7 @@ public class Odometer extends Thread {
 	// lock object for mutual exclusion
 	private Object lock;
 	
-	private int lastTachoLeft,  lastTachoRight;
-	private int nowTachoL, nowTachoR;
+	private int lastTachoLeft,  lastTachoRight, nowTachoL, nowTachoR;
 	private double rightArcLength, leftArcLength, deltaTheta, deltaArcLength;
 
 	// default constructor
@@ -31,8 +30,6 @@ public class Odometer extends Thread {
 	 * 
 	 */
 	public Odometer() {
-		lastTachoLeft = Motor.A.getTachoCount();
-		lastTachoRight = Motor.B.getTachoCount();
 		x = 0.0;
 		y = 0.0;
 		theta = 0.0;
@@ -60,8 +57,8 @@ public class Odometer extends Thread {
 			lastTachoR = Motor.B.getTachoCount();
 
 			//calculate the arc length traveled by each wheel
-			leftArcLength = ((differenceTachoL * 2 * Math.PI) /360) * 2.13;
-			rightArcLength = ((differenceTachoR * 2 * Math.PI) / 360) * 2.13;
+			leftArcLength = ((differenceTachoL * 2 * Math.PI) /360) * 2.12;
+			rightArcLength = ((differenceTachoR * 2 * Math.PI) / 360) * 2.12;
 
 			//determine the change in angle and arc length
 			deltaTheta = (leftArcLength - rightArcLength) / 10.3;
