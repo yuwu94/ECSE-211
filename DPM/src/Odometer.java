@@ -22,7 +22,7 @@ public class Odometer extends Thread {
 	// lock object for mutual exclusion
 	private Object lock;
 	
-	private int lastTachoLeft,  lastTachoRight, nowTachoL, nowTachoR;
+	private int lastTachoL,  lastTachoR, nowTachoL, nowTachoR;
 	private double rightArcLength, leftArcLength, deltaTheta, deltaArcLength;
 
 	// default constructor
