@@ -79,6 +79,13 @@ public class OdometryCorrection extends Thread{
 						
 						odo.setTheta(getNewTheta(newTheta));
 						
+						try {
+							Thread.sleep(500);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
 						break;
 					}
 				}		
@@ -97,6 +104,13 @@ public class OdometryCorrection extends Thread{
 						double newTheta = calculate(false);
 						
 						odo.setTheta(getNewTheta(newTheta));
+						
+						try {
+							Thread.sleep(500);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						
 						break;
 					}

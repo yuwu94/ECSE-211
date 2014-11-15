@@ -14,7 +14,7 @@ public class Navigation extends Thread{
 	WheelDriver driver;
 	
 	//tolerance / error
-	private static final double TOLERANCE = 2.0, RADS = 0.1;
+	private static final double TOLERANCE = 1.0, RADS = 0.2;
 	
 	private boolean navigating;
 	
@@ -115,7 +115,7 @@ public class Navigation extends Thread{
 	}
 	
 	//Travels to Point on the arena(use waypoint instead of coords)
-	private void travelTo(Waypoint point){
+	public void travelTo(Waypoint point){
 		
 		navigating = true;
 		update();
@@ -141,7 +141,7 @@ public class Navigation extends Thread{
 		driver.setSpeed(0,0);
 		
 		//waypoint will still be on stack if broken from while loop
-		waypoints.pop();
+		//waypoints.pop();
 		navigating = false;
 	}
 	
@@ -190,10 +190,11 @@ public class Navigation extends Thread{
 		//Will pop untill not navigating or waypoints all popped
 		while(navigating){
 			if(waypoints.isEmpty()){
-				break;
+				//break;
 			}
-			travelTo(waypoints.peek());
+			//travelTo(waypoints.peek());
 			if(!waypoints.isEmpty()){
+				travelTo(waypoints.peek());
 				navigating = true;
 			}
 		}

@@ -35,7 +35,20 @@ public class Odometer extends Thread {
 		theta = 0.0;
 		lock = new Object();
 	}
-
+	
+	//theta correction(wraps around 2pi)
+	public double thetaCorrection(double radians){
+		double t = radians;
+		if(t < 0){
+			t =(2*Math.PI) + t;
+		}
+		else if(t >= (2*Math.PI)){
+			t = t - (2*Math.PI);
+		}
+		return t;
+	}
+	
+	
 	// run method (required for Thread)
 	public void run() {
 		long updateStart, updateEnd;
@@ -49,12 +62,12 @@ public class Odometer extends Thread {
 			nowTachoR = Motor.B.getTachoCount();
 
 			//difference between the previous tacho count and the current one
-			int differenceTachoL = nowTachoL - lastTachoL;
-			int differenceTachoR = nowTachoR - lastTachoR;
+			int differenceTachoL = nowTachoL - lastTachoLeft;
+			int differenceTachoR = nowTachoR - lastTachoRight;
 
 			//set the current tacho to the previous tacho count
-			lastTachoL = Motor.A.getTachoCount();
-			lastTachoR = Motor.B.getTachoCount();
+			lastTachoLeft = Motor.A.getTachoCount();
+			lastTachoRight = Motor.B.getTachoCount();
 
 			//calculate the arc length traveled by each wheel
 			leftArcLength = ((differenceTachoL * 2 * Math.PI) /360) * 2.12;
@@ -69,7 +82,7 @@ public class Odometer extends Thread {
 				//calculations based on tutorial slides
 				x = x + deltaArcLength * Math.sin(theta + (deltaTheta / 2));
 				y = y + deltaArcLength * Math.cos(theta + (deltaTheta / 2));
-				theta = theta + deltaTheta;
+				theta = thetaCorrection(theta + deltaTheta);
 			}
 
 			// this ensures that the odometer only runs once every period

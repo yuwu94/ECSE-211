@@ -1,8 +1,9 @@
 import lejos.nxt.ColorSensor;
 import lejos.nxt.UltrasonicSensor;
+import lejos.robotics.Color;
 
 
-public class LightSensorPoller {
+public class LightSensorPoller extends Thread{
 	private ColorSensor sensor;
 	private int lightval;
 	private static final long UPDATE_PERIOD = 20;
@@ -12,6 +13,7 @@ public class LightSensorPoller {
 	 */
 	public LightSensorPoller(ColorSensor cs){
 		sensor = cs;
+		cs.setFloodlight(Color.GREEN);
 	}
 	
 	/** Returns the distances stored in the poller

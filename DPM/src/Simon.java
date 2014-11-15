@@ -31,7 +31,7 @@ public class Simon {
 		
 		//Odometer Initialization
 		Odometer odometer = new Odometer();
-		OdometryCorrection correction = new OdometryCorrection(odometer, null, null);
+		OdometryCorrection correction = new OdometryCorrection(odometer, rightCSControl, leftCSControl);
 		LCDDisplay display = new LCDDisplay(odometer);
 		
 		//Ultrasonic Initialization
@@ -40,9 +40,13 @@ public class Simon {
 		UltrasonicController usController = new UltrasonicController(usPoller);
 		
 		//Initialize map, localization, and navigation.
-		Navigation nav = new Navigation(0,0,odometer, null, wheels);
+		Navigation nav = new Navigation(0,0,odometer, wheels);
 		
-		
+		//Start all the threads
+		rightPoll.start();
+		leftPoll.start();
+		odometer.start();
+		nav.start();
 
 		do {
 			// clear the display
@@ -60,20 +64,22 @@ public class Simon {
 				&& buttonChoice != Button.ID_RIGHT);
 
 		if (buttonChoice == Button.ID_LEFT) {
-			NXTRegulatedMotor ClawMotor = Motor.C;
-			ClawMotor.flt();
-			LCD.clear();
-			while(true){
-				LCD.drawString("Claw Tachometer", 0, 0);
-				LCD.drawInt(ClawMotor.getTachoCount(), 0, 1);
-				if(Button.waitForAnyPress() == Button.ID_ESCAPE){
-					break;
-				}
-			}
-
+			claw.close();
+			claw.open();
 
 		} else {
-
+			display.start();
+			correction.start();
+			//nav.travelTo(new Waypoint(30,0));
+			//nav.turnTo(Math.PI/2);
+			//nav.travelTo(new Waypoint(30,30));
+			nav.travelTo(new Waypoint(0,30));
+			//nav.travelTo(new Waypoint(0,0));
+			//nav.turnTo(Math.PI);
+			//nav.travelTo(30, 30);
+			//nav.travelTo(0, 30);
+			//nav.waypoints.push(new Waypoint(10,0));
+			
 		}
 		
 		while (Button.waitForAnyPress() != Button.ID_ESCAPE);
