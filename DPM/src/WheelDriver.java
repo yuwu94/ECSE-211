@@ -39,7 +39,7 @@ public class WheelDriver {
 		}
 		else if(right > 0){
 			Motor.B.forward();
-			Motor.B.setSpeed(left);
+			Motor.B.setSpeed(right);  //changed made
 		}
 		else{
 			Motor.B.backward();
