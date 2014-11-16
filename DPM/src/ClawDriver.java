@@ -19,7 +19,7 @@ public class ClawDriver {
 		if(!isClosed){
 			//close here
 			claw.setSpeed(CLOSING_SPEED);
-			claw.rotate(500);
+			claw.rotate(590);
 			isClosed = true;
 		}
 	}
@@ -28,7 +28,7 @@ public class ClawDriver {
 		if(isClosed){
 			//open here
 			claw.setSpeed(CLOSING_SPEED);
-			claw.rotate(-500);
+			claw.rotate(-590);
 			isClosed = false;
 		}
 	}
