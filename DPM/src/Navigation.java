@@ -187,7 +187,7 @@ public class Navigation extends Thread{
 	
 	//Main Runnable
 	public void run(){
-		//Will pop untill not navigating or waypoints all popped
+		//Will pop until not navigating or waypoints all popped
 		while(navigating){
 			if(waypoints.isEmpty()){
 				//break;
