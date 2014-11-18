@@ -15,6 +15,7 @@ public class Navigation extends Thread{
 	//tolerance / error
 	private static final double TOLERANCE = 1.0, RADS = 0.2;
 	private static final int FORWARD_SPEED = 250;
+	private static final int ROTATE_SPEED = 150;
 	private static final double leftRadius = 2.1;
 	private static final double rightRadius = 2.15;
 	private static final double width = 9.5;
@@ -203,8 +204,11 @@ public class Navigation extends Thread{
 
 	//turns the robot clockwise by 90 degrees
 	public void turnCW(){
-		Motor.A.rotate(90);
-		Motor.B.rotate(-90);
+			Motor.A.setSpeed(ROTATE_SPEED);
+			Motor.B.setSpeed(ROTATE_SPEED);
+
+			Motor.A.rotate(convertAngle(leftRadius, width, 90.0), true);
+			Motor.B.rotate(-convertAngle(rightRadius, width, 90.0), false);
 	}
 
 	public void oneTileForward() {
@@ -219,8 +223,8 @@ public class Navigation extends Thread{
 		return (int) ((180.0 * distance) / (Math.PI * radius));
 	}
 
-	// private static int convertAngle(double radius, double width, double angle) {
-	// 	return convertDistance(radius, Math.PI * width * angle / 360.0);
-	// }
+	private static int convertAngle(double radius, double width, double angle) {
+	 	return convertDistance(radius, Math.PI * width * angle / 360.0);
+	}
 
 }
