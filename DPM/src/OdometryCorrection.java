@@ -1,17 +1,15 @@
 import lejos.nxt.LCD;
 import lejos.nxt.Sound;
-
-
 public class OdometryCorrection extends Thread{
 	private Odometer odo;
 	
 	private LightSensorController right,left;
 	
-	private static final int WIDTH = 3;
+	private static final double WIDTH = 8.6/2;
 	
 	private static final int LINE = 490;
 	
-	private static final int PERIOD = 500;
+	private static final int PERIOD = 534;
 	
 	private double xLast,yLast;
 	
@@ -26,17 +24,17 @@ public class OdometryCorrection extends Thread{
 	}
 	
 	public double calculate(boolean right){
-		double xDist = xLast - x;
-		double yDist = yLast - y;
+		double xDist = x - xLast;
+		double yDist = y - yLast;
 		double result;
 		
 		double position = Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
 		
 		if(right){
-			result = Math.PI/2 - Math.atan2(position, WIDTH);
+			result = Math.PI/2 + Math.atan2(position, WIDTH);
 		}
 		else{
-			result = Math.PI/2 + Math.atan2(position, WIDTH);
+			result = Math.PI/2 - Math.atan2(position, WIDTH);
 		}
 		
 		 return result;
@@ -45,30 +43,29 @@ public class OdometryCorrection extends Thread{
 	
 	public double getNewTheta(double theta){
 		double oldTheta = Math.toDegrees(odo.getTheta());
+		double newTheta = 0;
 		
-		//If facing north (between 315 and 45 degrees)
-		if(oldTheta >= 315 || oldTheta < 45){
-			return theta;
+		if (oldTheta >= 45 || oldTheta <= 135){
+			newTheta = theta;
+		} else if (oldTheta >= 315 && oldTheta <= 45){
+			newTheta = Math.PI/2 + theta;
+		} else if (oldTheta >= 225 || oldTheta <= 315){
+			newTheta = Math.PI + theta;
+		} else if (oldTheta >= 135 && oldTheta <= 225){
+			newTheta = Math.PI*(3/2) + theta;
 		}
-		//Facing east (between 135 and 45)
-		else if(oldTheta < 135 && oldTheta >= 45){
-			return Math.PI/2 + theta;
-		}
-		//Facing south (between 135 and 225)
-		else if(oldTheta < 225 && oldTheta >= 135 ){
-			return Math.PI + theta;
-		}
-		//facing west
-		else{
-			return Math.PI*(3/2) + theta;
-		}
-		
+		return newTheta;
 	}
 	
 	public void run(){
+		double newTheta = 0;
+		int rightValue = right.getFilteredVal();
+		int leftValue = left.getFilteredVal();
+		
 		while(true){
 			//Right sensor passes first
 			LCD.drawInt(right.getFilteredVal(), 0, 5);
+		
 			if(right.getFilteredVal() < LINE){
 				Sound.beep();
 				yLast = odo.getY();
@@ -80,12 +77,10 @@ public class OdometryCorrection extends Thread{
 						y = odo.getY();
 						x = odo.getX();
 						
-						double newTheta = calculate(true);
-						
-						odo.setTheta(getNewTheta(newTheta));
-						
+						newTheta = calculate(true);
+												
 						try {
-							Thread.sleep(500);
+							Thread.sleep(20);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -106,12 +101,10 @@ public class OdometryCorrection extends Thread{
 						y = odo.getY();
 						x = odo.getX();
 						
-						double newTheta = calculate(false);
-						
-						odo.setTheta(getNewTheta(newTheta));
+						newTheta = calculate(false);
 						
 						try {
-							Thread.sleep(500);
+							Thread.sleep(20);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -120,6 +113,9 @@ public class OdometryCorrection extends Thread{
 						break;
 					}
 				}		
+			}
+			while(rightValue < LINE && leftValue <LINE){
+				odo.setTheta(getNewTheta(newTheta));
 			}
 		}
 	}
