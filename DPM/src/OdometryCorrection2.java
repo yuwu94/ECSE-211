@@ -66,8 +66,8 @@
                           //sets correction path based on heading
                           //four cases, spanning the positive and negative x and y axis
                          
-                         
-                              if(((pos[2] > 315)&&(pos[2] <= 360))||((pos[2] >= 0)&&(pos[2] <= 45))) {
+                              double angle = Math.toDegrees(odo.getTheta());
+                              if(((angle > 315)&&(angle <= 360))||((angle >= 0)&&(angle <= 45))) {
                                   try {
                                                 yCorrection(true);
                                         } catch (InterruptedException e) {
@@ -75,7 +75,7 @@
                                                 e.printStackTrace();
                                         }
                                    }
-                                else if ((pos[2] <= (270-45))&&(pos[2]> (90 + 45)))
+                                else if ((angle <= (270-45))&&(angle > (90 + 45)))
                                         {try {
                                                 yCorrection(false);
                                         } catch (InterruptedException e) {
@@ -83,7 +83,7 @@
                                                 e.printStackTrace();
                                         }
                                         }
-                                else if ((pos[2] > (45))&&(pos[2] <= (90 + 45)))
+                                else if ((angle > (45))&&(angle <= (90 + 45)))
                                         {try {
                                                 xCorrection(true);
                                         } catch (InterruptedException e) {
@@ -91,7 +91,7 @@
                                                 e.printStackTrace();
                                         }
                                         }
-                                else if ((pos[2] > (270-45))&&(pos[2]<= (360-45)))
+                                else if ((anlge > (270-45))&&(angle<= (360-45)))
                                         try {
                                                 xCorrection(false);
                                         } catch (InterruptedException e) {
