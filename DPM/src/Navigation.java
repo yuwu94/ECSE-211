@@ -10,14 +10,17 @@ public class Navigation extends Thread{
 	private double x,y,theta;
 	Odometer odometer;
 	UltrasonicSensor usensor;
-	
 	WheelDriver driver;
 	
 	//tolerance / error
 	private static final double TOLERANCE = 1.0, RADS = 0.2;
-	
+	NXTRegulatedMotor leftMotor = new NXTRegulatedMotor;
+	NXTRegulatedMotor rightMotor = new NXTRegulatedMotor;
+	private static final int FORWARD_SPEED = 250;
+	private static final double leftRadius = 2.1;
+	private static final double rightRadius = 2.15;
+	private static final double width = 9.5;
 	private boolean navigating;
-	
 	public Stack<Waypoint> waypoints;
 	
 
@@ -198,6 +201,28 @@ public class Navigation extends Thread{
 				navigating = true;
 			}
 		}
-		
 	}
+
+	//turns the robot clockwise by 90 degrees
+	public void turnCW(){
+		leftMotor.rotate(90);
+		rightMotor.rotate(-90);
+	}
+
+	public void oneTileForward() {
+			leftMotor.setSpeed(FORWARD_SPEED);
+			rightMotor.setSpeed(FORWARD_SPEED);
+
+			leftMotor.rotate(convertDistance(leftRadius, 30.25), true);
+			rightMotor.rotate(convertDistance(rightRadius, 30.25), false);
+	}
+
+	private static int convertDistance(double radius, double distance) {
+		return (int) ((180.0 * distance) / (Math.PI * radius));
+	}
+
+	// private static int convertAngle(double radius, double width, double angle) {
+	// 	return convertDistance(radius, Math.PI * width * angle / 360.0);
+	// }
+
 }
