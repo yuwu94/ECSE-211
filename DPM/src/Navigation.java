@@ -14,8 +14,6 @@ public class Navigation extends Thread{
 	
 	//tolerance / error
 	private static final double TOLERANCE = 1.0, RADS = 0.2;
-	NXTRegulatedMotor leftMotor = new NXTRegulatedMotor;
-	NXTRegulatedMotor rightMotor = new NXTRegulatedMotor;
 	private static final int FORWARD_SPEED = 250;
 	private static final double leftRadius = 2.1;
 	private static final double rightRadius = 2.15;
@@ -205,16 +203,16 @@ public class Navigation extends Thread{
 
 	//turns the robot clockwise by 90 degrees
 	public void turnCW(){
-		leftMotor.rotate(90);
-		rightMotor.rotate(-90);
+		Motor.A.rotate(90);
+		Motor.B.rotate(-90);
 	}
 
 	public void oneTileForward() {
-			leftMotor.setSpeed(FORWARD_SPEED);
-			rightMotor.setSpeed(FORWARD_SPEED);
+			Motor.A.setSpeed(FORWARD_SPEED);
+			Motor.B.setSpeed(FORWARD_SPEED);
 
-			leftMotor.rotate(convertDistance(leftRadius, 30.25), true);
-			rightMotor.rotate(convertDistance(rightRadius, 30.25), false);
+			Motor.A.rotate(convertDistance(leftRadius, 30.25), true);
+			Motor.B.rotate(convertDistance(rightRadius, 30.25), false);
 	}
 
 	private static int convertDistance(double radius, double distance) {
