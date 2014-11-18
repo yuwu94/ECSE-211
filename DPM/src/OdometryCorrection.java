@@ -1,7 +1,6 @@
 
 public class OdometryCorrection extends Thread{
 	private Odometer odo;
-	
 	private LightSensorController right,left;
 	
 	private static final int WIDTH = 3;
