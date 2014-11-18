@@ -13,7 +13,8 @@ public class LightSensorPoller extends Thread{
 	 */
 	public LightSensorPoller(ColorSensor cs){
 		sensor = cs;
-		cs.setFloodlight(Color.GREEN);
+//		cs.setFloodlight(Color.GREEN);
+		cs.setFloodlight(true);
 	}
 	
 	/** Returns the distances stored in the poller
@@ -28,7 +29,7 @@ public class LightSensorPoller extends Thread{
 	long start,end;
 		while(true){
 			start = System.currentTimeMillis();
-			this.lightval = sensor.getLightValue();
+			this.lightval = sensor.getNormalizedLightValue();
 			end = System.currentTimeMillis();
 			if(end - start < UPDATE_PERIOD){
 				try{

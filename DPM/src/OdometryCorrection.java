@@ -1,11 +1,15 @@
+import lejos.nxt.LCD;
+import lejos.nxt.Sound;
+
 
 public class OdometryCorrection extends Thread{
 	private Odometer odo;
+	
 	private LightSensorController right,left;
 	
 	private static final int WIDTH = 3;
 	
-	private static final int LINE = 50;
+	private static final int LINE = 490;
 	
 	private static final int PERIOD = 500;
 	
@@ -64,13 +68,15 @@ public class OdometryCorrection extends Thread{
 	public void run(){
 		while(true){
 			//Right sensor passes first
-			if(right.getFilteredVal() > LINE){
+			LCD.drawInt(right.getFilteredVal(), 0, 5);
+			if(right.getFilteredVal() < LINE){
+				Sound.beep();
 				yLast = odo.getY();
 				xLast = odo.getX();
 				
 				//Wait for left Sensor
 				while(true){
-					if(left.getFilteredVal() > LINE){
+					if(left.getFilteredVal() < LINE){
 						y = odo.getY();
 						x = odo.getX();
 						
@@ -90,13 +96,13 @@ public class OdometryCorrection extends Thread{
 				}		
 			}
 			//Left Sensor passes first
-			if(left.getFilteredVal() > LINE){
+			if(left.getFilteredVal() < LINE){
 				yLast = odo.getY();
 				xLast = odo.getX();
 				
 				//Wait for right Sensor
 				while(true){
-					if(right.getFilteredVal() > LINE){
+					if(right.getFilteredVal() < LINE){
 						y = odo.getY();
 						x = odo.getX();
 						
