@@ -5,7 +5,7 @@ public class OdometryCorrection extends Thread{
 	
 	private LightSensorController right,left;
 	
-	private static final double WIDTH = 8.6/2;
+	private static final double WIDTH = 8.6;
 	
 	private static final int LINE = 490;
 	
