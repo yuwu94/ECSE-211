@@ -4,6 +4,8 @@ public class CSTest {
 		ColorSensor rightCS = new ColorSensor(SensorPort.S2);
 		ColorSensor leftCS = new ColorSensor(SensorPort.S3);
 
+		leftCS.setFloodlight(Color.GREEN);
+		rightCS.setFloodlight(Color.GREEN);
 
 		int leftValue = leftCS.readNormalizedValue();
 		int rightValue = rightCS.readNormalizedValue();
