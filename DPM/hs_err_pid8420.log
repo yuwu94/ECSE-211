@@ -1,0 +1,153 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (javaClasses.cpp:126), pid=8420, tid=8788
+#  fatal error: Invalid layout of preloaded class
+#
+# JRE version:  (8.0_25-b18) (build )
+# Java VM: Java HotSpot(TM) Client VM (25.25-b02 mixed mode windows-x86 )
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x02b4c000):  JavaThread "Unknown thread" [_thread_in_vm, id=8788, stack(0x02820000,0x02870000)]
+
+Stack: [0x02820000,0x02870000],  sp=0x0286f6e0,  free space=317k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x19796b]
+V  [jvm.dll+0x1908e6]
+V  [jvm.dll+0x3b4e9]
+V  [jvm.dll+0x3b69e]
+V  [jvm.dll+0x4a063]
+V  [jvm.dll+0x9dc8e]
+V  [jvm.dll+0x9df52]
+V  [jvm.dll+0x145a01]
+V  [jvm.dll+0x169ab8]
+V  [jvm.dll+0xdaea1]
+C  [javaw.exe+0x13e4]
+C  [javaw.exe+0x1eb7]
+C  [javaw.exe+0xaba1]
+C  [javaw.exe+0xac2b]
+C  [KERNEL32.DLL+0x1919f]
+C  [ntdll.dll+0x50bbb]
+C  [ntdll.dll+0x50b91]
+C  0x00000000
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x02b4c000 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=8788, stack(0x02820000,0x02870000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.007 loading class java/lang/Object
+Event: 0.008 loading class java/lang/Object done
+Event: 0.008 loading class java/lang/String
+Event: 0.008 loading class java/lang/CharSequence
+Event: 0.008 loading class java/lang/CharSequence done
+Event: 0.008 loading class java/lang/Comparable
+Event: 0.008 loading class java/lang/Comparable done
+Event: 0.008 loading class java/lang/String done
+Event: 0.008 loading class java/lang/Class
+Event: 0.008 loading class java/lang/Class done
+
+
+Dynamic libraries:
+0x00230000 - 0x00260000 	C:\Program Files (x86)\Java\jre1.8.0_25\bin\javaw.exe
+0x77c30000 - 0x77d97000 	C:\Windows\SYSTEM32\ntdll.dll
+0x77930000 - 0x77a70000 	C:\Windows\SYSTEM32\KERNEL32.DLL
+0x776d0000 - 0x777a0000 	C:\Windows\SYSTEM32\KERNELBASE.dll
+0x6feb0000 - 0x6ff49000 	C:\Windows\system32\apphelp.dll
+0x65a10000 - 0x65c69000 	C:\Windows\AppPatch\AcGenral.DLL
+0x76d50000 - 0x76e0e000 	C:\Windows\SYSTEM32\msvcrt.dll
+0x772b0000 - 0x772ee000 	C:\Windows\SYSTEM32\sechost.dll
+0x75640000 - 0x7565d000 	C:\Windows\SYSTEM32\SspiCli.dll
+0x77a70000 - 0x77ab1000 	C:\Windows\SYSTEM32\SHLWAPI.dll
+0x71060000 - 0x7113b000 	C:\Windows\SYSTEM32\UxTheme.dll
+0x76fd0000 - 0x7711c000 	C:\Windows\SYSTEM32\USER32.dll
+0x772f0000 - 0x773f7000 	C:\Windows\SYSTEM32\GDI32.dll
+0x72de0000 - 0x72e00000 	C:\Windows\SYSTEM32\WINMM.dll
+0x71020000 - 0x71032000 	C:\Windows\SYSTEM32\samcli.dll
+0x75920000 - 0x75a2c000 	C:\Windows\SYSTEM32\ole32.dll
+0x77ac0000 - 0x77b55000 	C:\Windows\SYSTEM32\OLEAUT32.dll
+0x67b80000 - 0x67b95000 	C:\Windows\SYSTEM32\MSACM32.dll
+0x752e0000 - 0x752e8000 	C:\Windows\SYSTEM32\VERSION.dll
+0x75a30000 - 0x76be7000 	C:\Windows\SYSTEM32\SHELL32.dll
+0x74c40000 - 0x74c59000 	C:\Windows\SYSTEM32\USERENV.dll
+0x71040000 - 0x71058000 	C:\Windows\SYSTEM32\dwmapi.dll
+0x69c90000 - 0x69dda000 	C:\Windows\SYSTEM32\urlmon.dll
+0x75680000 - 0x756f8000 	C:\Windows\SYSTEM32\ADVAPI32.dll
+0x712a0000 - 0x712fe000 	C:\Windows\SYSTEM32\WINSPOOL.DRV
+0x6f800000 - 0x6f814000 	C:\Windows\SYSTEM32\MPR.dll
+0x77620000 - 0x776d0000 	C:\Windows\SYSTEM32\RPCRT4.dll
+0x75630000 - 0x75639000 	C:\Windows\SYSTEM32\CRYPTBASE.dll
+0x76c00000 - 0x76d4e000 	C:\Windows\SYSTEM32\combase.dll
+0x71b80000 - 0x71ba0000 	C:\Windows\SYSTEM32\WINMMBASE.dll
+0x74c20000 - 0x74c2e000 	C:\Windows\SYSTEM32\profapi.dll
+0x74c60000 - 0x74e92000 	C:\Windows\SYSTEM32\iertutil.dll
+0x74fe0000 - 0x751b6000 	C:\Windows\SYSTEM32\WININET.dll
+0x755d0000 - 0x75622000 	C:\Windows\SYSTEM32\bcryptPrimitives.dll
+0x758e0000 - 0x7591a000 	C:\Windows\SYSTEM32\cfgmgr32.dll
+0x71b60000 - 0x71b7f000 	C:\Windows\SYSTEM32\DEVOBJ.dll
+0x73ba0000 - 0x73c16000 	C:\Windows\SYSTEM32\SHCORE.DLL
+0x777a0000 - 0x777c5000 	C:\Windows\system32\IMM32.DLL
+0x771b0000 - 0x772a7000 	C:\Windows\SYSTEM32\MSCTF.dll
+0x71400000 - 0x715e6000 	C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.9600.17031_none_a9efdb8b01377ea7\COMCTL32.dll
+0x63ac0000 - 0x63b7f000 	C:\Program Files (x86)\Java\jre1.8.0_25\bin\msvcr100.dll
+0x64110000 - 0x644b4000 	C:\Program Files (x86)\Java\jre1.8.0_25\bin\client\jvm.dll
+0x752f0000 - 0x752f8000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x77920000 - 0x77926000 	C:\Windows\SYSTEM32\PSAPI.DLL
+0x75890000 - 0x758dd000 	C:\Windows\SYSTEM32\WS2_32.dll
+0x76bf0000 - 0x76bf7000 	C:\Windows\SYSTEM32\NSI.dll
+0x676d0000 - 0x676dc000 	C:\Program Files (x86)\Java\jre1.8.0_25\bin\verify.dll
+0x640e0000 - 0x64101000 	C:\Program Files (x86)\Java\jre1.8.0_25\bin\java.dll
+0x640c0000 - 0x640d3000 	C:\Program Files (x86)\Java\jre1.8.0_25\bin\zip.dll
+0x70d00000 - 0x70e48000 	C:\Windows\SYSTEM32\dbghelp.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=Cp1252 -Xbootclasspath:C:\Program Files (x86)\leJOS NXJ\lib\nxt\classes.jar 
+java_command: MapTester
+java_class_path (initial): C:\ECSE\ECSE-211\DPM\bin
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=C:/Program Files (x86)/Java/jre1.8.0_25/bin/client;C:/Program Files (x86)/Java/jre1.8.0_25/bin;C:/Program Files (x86)/Java/jre1.8.0_25/lib/i386;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin;C:\Program Files (x86)\leJOS NXJ\bin;C:\Users\Daniel\Desktop\eclipse;
+USERNAME=Daniel
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 60 Stepping 3, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 8.1 , 64 bit Build 9600 
+
+CPU:total 4 (2 cores per cpu, 2 threads per core) family 6 model 60 stepping 3, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2
+
+Memory: 4k page, physical 8303996k(4887552k free), swap 13022588k(7657704k free)
+
+vm_info: Java HotSpot(TM) Client VM (25.25-b02) for windows-x86 JRE (1.8.0_25-b18), built on Oct  7 2014 14:31:05 by "java_re" with MS VC++ 10.0 (VS2010)
+
+time: Sun Nov 16 15:15:06 2014
+elapsed time: 0 seconds (0d 0h 0m 0s)
+

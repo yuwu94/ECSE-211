@@ -1,0 +1,16 @@
+
+public class MapTester {
+	public static void main(String[] args){
+		boolean[][] walls = {{false,false,false,false},{false,false,false,false},{false,false,false,false},{false,false,false,false}};
+		
+		Map map = new Map(4,1);
+		
+		map.addWalls(walls);
+		
+		map.populate();
+
+
+		
+		System.out.println("Hello");
+	}
+}
