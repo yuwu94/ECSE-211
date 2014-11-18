@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 public class GridSquare {
-	private boolean isWall;
+	private boolean isWall,visited;
 	private int x,y;
 	private Map map;
 	
@@ -11,7 +11,16 @@ public class GridSquare {
 		this.y = y;
 		this.map = map;
 		this.isWall = wall;
+		visited = false;
 		
+	}
+	
+	public void visit(){
+		visited = true;
+	}
+	
+	public boolean isVisited(){
+		return visited;
 	}
 	
 	public int getX(){

@@ -15,6 +15,10 @@ public class Ghost {
 		this.valid = true;
 	}
 	
+	public void invalid(){
+		valid = false;
+	}
+	
 	public boolean isValid(){
 		return valid;
 	}
@@ -86,13 +90,13 @@ public class Ghost {
 		if(orientation.equals("N")){
 			orientation = "E";
 		}
-		if(orientation.equals("S")){
+		else if(orientation.equals("S")){
 			orientation = "W";
 		}
-		if(orientation.equals("E")){
+		else if(orientation.equals("E")){
 			orientation = "S";
 		}
-		if(orientation.equals("W")){
+		else if(orientation.equals("W")){
 			orientation = "N";
 		}
 	}

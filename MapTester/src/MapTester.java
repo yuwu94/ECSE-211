@@ -37,17 +37,19 @@ public class MapTester {
 			}
 		}
 		
-		Ghost robot = new Ghost(0,0,"N",map);
-		
+		Ghost robot = new Ghost(3,5,"N",map);
+		//robot.turn();
+		//System.out.println(robot.getX() + " , " + robot.getY() + " , " + robot.getOrientation() + " , " + robot.wallinFront());
+		Localizer loc = new Localizer(map,robot);
+		loc.start();
 
-
-		System.out.println(gs.size());
+		System.out.println(loc.numValid());
 		for(Ghost goul : gs){
-			System.out.println(goul.getX() + " , " + goul.getY() + " , " + goul.getOrientation() + " , " + goul.wallinFront());
+			//System.out.println(goul.getX() + " , " + goul.getY() + " , " + goul.getOrientation() + " , " + goul.wallinFront());
 			//gs.remove(goul);
 		}
 		
-		System.out.println(gs.size());
+		//System.out.println(gs.size());
 		//System.out.println(g.getX() + " , " + g.getY() + " , " + g.getOrientation() + " , " + g.wallinFront());
 		
 
