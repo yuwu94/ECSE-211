@@ -70,11 +70,11 @@ public class Odometer extends Thread {
 			lastTachoRight = Motor.B.getTachoCount();
 
 			//calculate the arc length traveled by each wheel
-			leftArcLength = ((differenceTachoL * 2 * Math.PI) /360) * 2.12;
-			rightArcLength = ((differenceTachoR * 2 * Math.PI) / 360) * 2.12;
+			leftArcLength = ((differenceTachoL * 2 * Math.PI) /360) * 2.1;
+			rightArcLength = ((differenceTachoR * 2 * Math.PI) / 360) * 2.15;
 
 			//determine the change in angle and arc length
-			deltaTheta = (leftArcLength - rightArcLength) / 10.3;
+			deltaTheta = (leftArcLength - rightArcLength) / 9.5;
 			deltaArcLength = (leftArcLength + rightArcLength) / 2;
 
 			synchronized (lock) {
