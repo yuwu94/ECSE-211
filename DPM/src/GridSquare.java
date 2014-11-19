@@ -67,6 +67,10 @@ public class GridSquare {
 		}
 		return adj;
 	}
+
+	public Map getMap() {
+		return map;
+	}
 	
 	
 }

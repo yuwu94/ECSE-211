@@ -40,7 +40,7 @@ public class Pathfinder {
 				for(GridSquare g : p.getEnd().getSquares()){
 					if(!g.isVisited()){
 						Path newPath = new Path();
-						newPath = (Path) p.clone();
+						newPath = p.clone();
 						newPath.addSquare(g);
 						g.visit();
 						temp.add(newPath);

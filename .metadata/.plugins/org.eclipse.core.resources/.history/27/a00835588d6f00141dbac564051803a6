@@ -15,7 +15,6 @@ public class GridSquare {
 		
 	}
 	
-
 	public void visit(){
 		visited = true;
 	}
@@ -70,6 +69,7 @@ public class GridSquare {
 	}
 
 	public Map getMap() {
+		// TODO Auto-generated method stub
 		return map;
 	}
 	

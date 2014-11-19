@@ -15,7 +15,13 @@ public class Path {
 		
 	
 	public void setSquares(ArrayList<GridSquare> s){
-		//this.squares = (ArrayList<GridSquare>) s.clone();
+		for(GridSquare sq : s){
+			GridSquare n = new GridSquare(sq.getMap(),sq.getX(),sq.getY(),sq.isWall());
+			if(sq.isVisited()){
+				n.visit();
+			}
+			this.squares.add(sq);
+		}
 	}
 	
 	public void addSquare(GridSquare s){

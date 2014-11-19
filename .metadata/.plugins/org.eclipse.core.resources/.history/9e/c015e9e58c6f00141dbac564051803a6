@@ -15,7 +15,6 @@ public class GridSquare {
 		
 	}
 	
-
 	public void visit(){
 		visited = true;
 	}
@@ -67,10 +66,6 @@ public class GridSquare {
 			}
 		}
 		return adj;
-	}
-
-	public Map getMap() {
-		return map;
 	}
 	
 	

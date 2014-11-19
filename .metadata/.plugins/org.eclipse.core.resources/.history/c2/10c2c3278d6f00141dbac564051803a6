@@ -15,7 +15,10 @@ public class GridSquare {
 		
 	}
 	
-
+	public Map getMap(){
+		return map;
+	}
+	
 	public void visit(){
 		visited = true;
 	}

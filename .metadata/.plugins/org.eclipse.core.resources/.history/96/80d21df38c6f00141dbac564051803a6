@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class GridSquare {
 	private boolean isWall,visited;
 	private int x,y;
-	private Map map;
+	protected Map map;
 	
 	public GridSquare(Map map,int x, int y, boolean wall){
 		this.x = x;
@@ -15,7 +15,6 @@ public class GridSquare {
 		
 	}
 	
-
 	public void visit(){
 		visited = true;
 	}
@@ -67,10 +66,6 @@ public class GridSquare {
 			}
 		}
 		return adj;
-	}
-
-	public Map getMap() {
-		return map;
 	}
 	
 	

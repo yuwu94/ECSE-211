@@ -18,7 +18,6 @@ public class Path {
 			if(sq.isVisited()){
 				n.visit();
 			}
-			this.squares.add(sq);
 		}
 	}
 	

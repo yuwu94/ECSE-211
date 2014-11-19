@@ -13,13 +13,7 @@ public class Path {
 	}
 	
 	public void setSquares(ArrayList<GridSquare> s){
-		for(GridSquare sq : s){
-			GridSquare n = new GridSquare(sq.getMap(),sq.getX(),sq.getY(),sq.isWall());
-			if(sq.isVisited()){
-				n.visit();
-			}
-			this.squares.add(sq);
-		}
+		this.squares = s;
 	}
 	
 	public void addSquare(GridSquare s){

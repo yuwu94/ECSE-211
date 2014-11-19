@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class Path {
+public class Path implements Cloneable {
 	private ArrayList<GridSquare> squares;
 	private ArrayList<Waypoint> points;
 	
@@ -13,13 +13,7 @@ public class Path {
 	}
 	
 	public void setSquares(ArrayList<GridSquare> s){
-		for(GridSquare sq : s){
-			GridSquare n = new GridSquare(sq.getMap(),sq.getX(),sq.getY(),sq.isWall());
-			if(sq.isVisited()){
-				n.visit();
-			}
-			this.squares.add(sq);
-		}
+		//this.squares = s;
 	}
 	
 	public void addSquare(GridSquare s){
@@ -27,10 +21,12 @@ public class Path {
 		squares.add(s);
 	}
 	
-	public Path clone(){
-		Path p = new Path();
-		p.setSquares(this.squares);
-		return p;
+	public Object clone(){  
+	    try{  
+	        return super.clone();  
+	    }catch(Exception e){ 
+	        return null; 
+	    }
 	}
 	
 	public ArrayList<GridSquare> getSquares(){
