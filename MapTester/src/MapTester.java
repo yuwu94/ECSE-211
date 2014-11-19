@@ -15,7 +15,7 @@ public class MapTester {
 		
 		Map map = new Map(8,1);
 		
-		map.addWalls(walls2);
+		map.addWalls(walls);
 		
 		map.populate();
 		if(map.getWalls() != null){
@@ -61,15 +61,21 @@ public class MapTester {
 		testPath.addSquare(new GridSquare(map,2,3,false));
 		System.out.println(testPath.toString());
 		
-		Pathfinder jerry = new Pathfinder(map,map.getSquare(0, 0),map.getSquare(3, 6));
+		Pathfinder jerry = new Pathfinder(map,map.getSquare(0, 0),map.getSquare(0, 6));
 		jerry.genPath();
+		Path ps = jerry.getPath();
+		for(Waypoint point : ps.getPoints()){
+			System.out.println(point.getX() + "," + point.getY());
+		}
 		System.out.println(jerry.getPath().toString());
 		
 		Ghost robot = new Ghost(0,7,"N",map);
-		robot.turn();
-		System.out.println(robot.getX() + " , " + robot.getY() + " , " + robot.getOrientation() + " , " + robot.wallinFront());
+		//robot.turn();
+		
 		Localizer loc = new Localizer(map,robot);
-		//loc.run();
+		loc.run();
+		System.out.println(robot.getX() + " , " + robot.getY() + " , " + robot.getOrientation() + " , " + robot.wallinFront());
+		//System.out.println(map.getSquare(0, 6).isWall());
 
 		//System.out.println(loc.numValid());
 		for(Ghost goul : gs){
@@ -81,6 +87,6 @@ public class MapTester {
 		//System.out.println(g.getX() + " , " + g.getY() + " , " + g.getOrientation() + " , " + g.wallinFront());
 		
 
-		System.out.println("Hello");
+		System.out.println(Math.PI/2 * 3);
 	}
 }

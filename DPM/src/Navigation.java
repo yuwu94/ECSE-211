@@ -19,7 +19,7 @@ import java.util.ArrayList;
             private static final int ROTATE_SPEED = 150;
             private static final double leftRadius = 2.1;
             private static final double rightRadius = 2.15;
-            private static final double width = 9.1;
+            private static final double width = 9.5;
             private boolean navigating;
             public Stack<Waypoint> waypoints;
            

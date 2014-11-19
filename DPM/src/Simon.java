@@ -65,8 +65,8 @@ public class Simon {
 		//Start all the threads
 		rightPoll.start();
 		leftPoll.start();
-		odometer.start();
-		nav.start();
+//		odometer.start();
+//		nav.start();
 
 		do {
 			// clear the display
@@ -87,10 +87,10 @@ public class Simon {
 			//claw.close();
 			//claw.open();
 			
-			odometer.setX(15);
-			odometer.setY(15);
-			correction.start();
-			Path testPath = new Path();
+			//odometer.setX(15);
+			//odometer.setY(15);
+			//correction.start();
+			//Path testPath = new Path();
 //			testPath.addSquare(new GridSquare(map,0,0,false));
 //			testPath.addSquare(new GridSquare(map,1,0,false));
 //			testPath.addSquare(new GridSquare(map,1,1,false));
@@ -98,15 +98,15 @@ public class Simon {
 //			testPath.addSquare(new GridSquare(map,1,3,false));
 //			testPath.addSquare(new GridSquare(map,2,3,false));
 			
-			nav.travelPath(testPath);
+			//nav.travelPath(testPath);
 
 		} 
 		else if(buttonChoice == Button.ID_RIGHT) {
-			display.start();
+			//display.start();
 			//nav.travelTo(new Waypoint(30,0));
 			//nav.turnTo(Math.PI/2);
 			//nav.travelTo(new Waypoint(30,30));
-			nav.travelTo(new Waypoint(0,30));
+			//nav.travelTo(new Waypoint(0,30));
 			//nav.travelTo(new Waypoint(0,0));
 			//nav.turnTo(Math.PI);
 			//nav.travelTo(30, 30);
@@ -115,12 +115,22 @@ public class Simon {
 			
 		}
 		else{
+			odometer.start();
 			Map map = new Map(8,1);
 			map.addWalls(walls1);
 			map.populate();
 			display.start();
 			Localizer localizer = new Localizer(map,odometer,nav,usPoller);
 			localizer.run();
+			localizer.setOdo();
+			Pathfinder pf = new Pathfinder(map,map.getSquare(1, 2),map.getSquare(localizer.getX(), localizer.getY()));
+			pf.genPath();
+			
+			
+			odometer.setX(localizer.getX()*30 + 15);
+			odometer.setY(localizer.getY() * 30 + 15);
+			odometer.setTheta(localizer.thet);
+			nav.travelPath(pf.getPath());
 
 		}
 		
