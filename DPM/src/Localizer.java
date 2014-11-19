@@ -10,6 +10,7 @@ public class Localizer{
 	int gridx,gridy,turncount;
 	
 	private static final int WALL = 20;
+	private static final int WALL2 = 40;
 	
 	private Odometer odo;
 	
@@ -77,6 +78,14 @@ public class Localizer{
 		}
 	}
 	
+	public void wall2(){
+		for(Ghost g : ghosts){
+			if(g.wallinFront() != 2){
+				g.invalid();
+			}
+		}
+	}
+	
 	public void run(){
 		while(numValid() > 1){
 			if(controller.getDist() < WALL){
@@ -88,14 +97,48 @@ public class Localizer{
 					}
 				}
 			}
-			else{
-				noWall();
-				nav.oneTileForward();
-				for(Ghost g : ghosts){
-					if(g.isValid()){
-						g.move();
+			else if(controller.getDist() < WALL2){
+				wall2();
+				if(turncount >= 3){
+					turncount = 0;
+					nav.turnCCW();
+					for(Ghost g : ghosts){
+						if(g.isValid()){
+							g.turnLeft();
+						}
 					}
 				}
+				else{
+					turncount++;
+					nav.oneTileForward();
+					for(Ghost g : ghosts){
+						if(g.isValid()){
+							g.move();
+						}
+					}
+				}
+			}
+			else{
+				noWall();
+				if(turncount >= 3){
+					turncount = 0;
+					nav.turnCCW();
+					for(Ghost g : ghosts){
+						if(g.isValid()){
+							g.turnLeft();
+						}
+					}
+				}
+				else{
+					turncount++;
+					nav.oneTileForward();
+					for(Ghost g : ghosts){
+						if(g.isValid()){
+							g.move();
+						}
+					}
+				}
+
 			}
 		}
 		for(Ghost g : ghosts){

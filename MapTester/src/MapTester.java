@@ -9,9 +9,13 @@ public class MapTester {
 			,{false,false,false,false,false,true,false,false},{false,true,true,true,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,true,false,false,true,false,false},
 			{true,false,true,true,false,false,true,false}};
 		
+		boolean[][] walls2 = {{false,false,false,false,false,true,false,false},{false,false,false,false,false,false,true,false},{true,false,false,true,true,false,false,false}
+		,{false,true,false,false,false,false,false,true},{false,false,false,false,true,false,true,true},{true,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false},
+		{true,true,false,false,false,false,true,true}};
+		
 		Map map = new Map(8,1);
 		
-		map.addWalls(walls);
+		map.addWalls(walls2);
 		
 		map.populate();
 		if(map.getWalls() != null){
@@ -37,6 +41,16 @@ public class MapTester {
 			}
 		}
 		
+		for(int i = 0; i < map.getSize(); i++){
+			for(int j = 0; j < map.getSize(); j++){
+				if(!map.getSquare(i,j).isWall()){
+					//Ghost robot = new Ghost(i,j,"E",map);
+					//Localizer loc = new Localizer(map,robot);
+					//System.out.println(robot.getX() + " , " + robot.getY() + " , " + robot.getOrientation() + " , " + robot.wallinFront());
+					//loc.run();
+				}
+			}
+		}
 		
 		Path testPath = new Path();
 		testPath.addSquare(new GridSquare(map,0,0,false));
@@ -52,12 +66,12 @@ public class MapTester {
 		System.out.println(jerry.getPath().toString());
 		
 		Ghost robot = new Ghost(0,7,"N",map);
-		//robot.turn();
-		//System.out.println(robot.getX() + " , " + robot.getY() + " , " + robot.getOrientation() + " , " + robot.wallinFront());
+		robot.turn();
+		System.out.println(robot.getX() + " , " + robot.getY() + " , " + robot.getOrientation() + " , " + robot.wallinFront());
 		Localizer loc = new Localizer(map,robot);
-		loc.run();
+		//loc.run();
 
-		System.out.println(loc.numValid());
+		//System.out.println(loc.numValid());
 		for(Ghost goul : gs){
 			//System.out.println(goul.getX() + " , " + goul.getY() + " , " + goul.getOrientation() + " , " + goul.wallinFront());
 			//gs.remove(goul);

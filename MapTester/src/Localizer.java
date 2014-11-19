@@ -10,7 +10,7 @@ public class Localizer extends Thread{
 	
 	private static final int WALL = 20;
 	
-	int turncount;
+	int turncount,thresh;
 	
 	private Map map;
 	
@@ -23,6 +23,8 @@ public class Localizer extends Thread{
 		this.robot = robot;
 		
 		turncount = 0;
+		
+		thresh = 3;
 		
 		ghosts = new ArrayList<Ghost>();
 		
@@ -82,7 +84,7 @@ public class Localizer extends Thread{
 	
 	public void run(){
 		while(numValid() > 1){
-			System.out.println(robot.getX() + " , " + robot.getY() + " , " + robot.getOrientation() + " , " + robot.wallinFront());
+			//System.out.println(robot.getX() + " , " + robot.getY() + " , " + robot.getOrientation() + " , " + robot.wallinFront());
 			//System.out.println(numValid());
 			if(robot.wallinFront() == 1){
 				wall();
@@ -108,8 +110,9 @@ public class Localizer extends Thread{
 			}
 			else if(robot.wallinFront() == 2){
 				wall2();
-				if(turncount >= 3){
+				if(turncount >= thresh){
 					turncount = 0;
+					//thresh++;
 					robot.turnLeft();
 					for(Ghost g : ghosts){
 						if(g.isValid()){
@@ -129,7 +132,8 @@ public class Localizer extends Thread{
 			}
 			else{
 				noWall();
-				if(turncount >= 3){
+				if(turncount >= thresh){
+					//thresh++;
 					turncount = 0;
 					robot.turnLeft();
 					for(Ghost g : ghosts){

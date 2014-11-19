@@ -31,6 +31,12 @@ public class Ghost {
 			else if(map.getSquare(x,y+1).isWall()){
 				return 1;
 			}
+			else if(map.getSquare(x, y+2) == null){
+				return 1;
+			}
+			else if(map.getSquare(x,y+2).isWall()){
+				return 1;
+			}
 		}
 		if(orientation.equals("S")){
 			if(map.getSquare(x, y-1) == null){
@@ -38,6 +44,12 @@ public class Ghost {
 			}
 			else if(map.getSquare(x,y-1).isWall()){
 				return 1;
+			}
+			else if(map.getSquare(x, y-2) == null){
+				return 2;
+			}
+			else if(map.getSquare(x,y-2).isWall()){
+				return 2;
 			}
 		}
 		if(orientation.equals("E")){
@@ -47,6 +59,12 @@ public class Ghost {
 			else if(map.getSquare(x+1,y).isWall()){
 				return 1;
 			}
+			else if(map.getSquare(x+2, y) == null){
+				return 2;
+			}
+			else if(map.getSquare(x+2,y).isWall()){
+				return 2;
+			}
 		}
 		if(orientation.equals("W")){
 			if(map.getSquare(x-1, y) == null){
@@ -54,6 +72,12 @@ public class Ghost {
 			}
 			else if(map.getSquare(x-1,y).isWall()){
 				return 1;
+			}
+			if(map.getSquare(x-2, y) == null){
+				return 2;
+			}
+			else if(map.getSquare(x-2,y).isWall()){
+				return 2;
 			}
 		}
 		return 0;
