@@ -74,7 +74,7 @@ public class Odometer extends Thread {
 			rightArcLength = ((differenceTachoR * 2 * Math.PI) / 360) * 2.15;
 
 			//determine the change in angle and arc length
-			deltaTheta = (leftArcLength - rightArcLength) / 9.5;
+			deltaTheta = (leftArcLength - rightArcLength) / 9.1;
 			deltaArcLength = (leftArcLength + rightArcLength) / 2;
 
 			synchronized (lock) {
