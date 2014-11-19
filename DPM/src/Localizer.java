@@ -10,7 +10,7 @@ public class Localizer{
 	int gridx,gridy,turncount;
 	
 	private static final int WALL = 25;
-	private static final int WALL2 = 45;
+	private static final int WALL2 = 50;
 	
 	double thet;
 	
@@ -90,7 +90,7 @@ public class Localizer{
 	}
 	
 	public void run(){
-		while(numValid() > 1){
+		while(numValid() != 1){
 			if(controller.getDist() < WALL){
 				wall();
 				nav.turnCCW();
@@ -101,6 +101,7 @@ public class Localizer{
 				}
 			}
 			else if(controller.getDist() < WALL2){
+				Sound.beep();
 				wall2();
 				if(turncount >= 3){
 					turncount = 0;
@@ -122,6 +123,7 @@ public class Localizer{
 				}
 			}
 			else{
+				Sound.buzz();
 				noWall();
 				if(turncount >= 3){
 					turncount = 0;
@@ -158,14 +160,17 @@ public class Localizer{
 			}
 		}
 		
-		Sound.beep();
+		//Sound.beep();
 		running = false;
 	}
 	
 	public void setOdo(){
-		odo.setX(gridx*30 + 15);
-		odo.setY(gridy* 30 + 15);
-		odo.setTheta(thet);
+		double[] arr = {(gridx*30 + 15), (gridy* 30 + 15),thet};
+		boolean[] arr2 = {true,true,true};
+		odo.setPosition(arr,arr2);
+//		odo.setX(gridx*30 + 15);
+//		odo.setY(gridy* 30 + 15);
+//		odo.setTheta(thet);
 	}
 	
 	public int getX(){

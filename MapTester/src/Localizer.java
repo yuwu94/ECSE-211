@@ -88,29 +88,16 @@ public class Localizer extends Thread{
 			//System.out.println(numValid());
 			if(robot.wallinFront() == 1){
 				wall();
-				if(turncount < 0){
-					//turncount++;
-					robot.turn();
-					for(Ghost g : ghosts){
-						if(g.isValid()){
-							g.turn();
-						}
+				robot.turnLeft();
+				for(Ghost g : ghosts){
+					if(g.isValid()){
+						g.turnLeft();
 					}
 				}
-				else{
-					
-					robot.turnLeft();
-					for(Ghost g : ghosts){
-						if(g.isValid()){
-							g.turnLeft();
-						}
-					}
-				}
-
 			}
 			else if(robot.wallinFront() == 2){
 				wall2();
-				if(turncount >= thresh){
+				if(turncount >= 3){
 					turncount = 0;
 					//thresh++;
 					robot.turnLeft();
@@ -131,8 +118,9 @@ public class Localizer extends Thread{
 				}
 			}
 			else{
+				
 				noWall();
-				if(turncount >= thresh){
+				if(turncount >= 3){
 					//thresh++;
 					turncount = 0;
 					robot.turnLeft();

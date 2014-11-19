@@ -15,11 +15,11 @@ import java.util.ArrayList;
             //tolerance / error
             private static final double TOLERANCE = 1.0, RADS = 0.2;
             private static final int FORWARD_SPEED = 250;
-            private static final int speedDifference = 2;
+            private static final int speedDifference = 3;
             private static final int ROTATE_SPEED = 150;
             private static final double leftRadius = 2.1;
             private static final double rightRadius = 2.15;
-            private static final double width = 9.5;
+            private static final double width = 9.3;
             private boolean navigating;
             public Stack<Waypoint> waypoints;
            
@@ -27,9 +27,9 @@ import java.util.ArrayList;
            
             //Constructor
             public Navigation(double x, double y, Odometer odometer, WheelDriver driver){
-                    this.x = x;
-                    this.y = y;
-                    theta = 0;
+                    this.x = odometer.getX();
+                    this.y = odometer.getY();
+                    theta = odometer.getTheta();
                    
                     this.driver = driver;
                    

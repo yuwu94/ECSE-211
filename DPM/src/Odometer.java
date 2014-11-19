@@ -77,13 +77,13 @@ public class Odometer extends Thread {
 			deltaTheta = (leftArcLength - rightArcLength) / 9.1;
 			deltaArcLength = (leftArcLength + rightArcLength) / 2;
 
-			//synchronized (lock) {
+			synchronized (lock) {
 				// don't use the variables x, y, or theta anywhere but here!
 				//calculations based on tutorial slides
 				x = x + deltaArcLength * Math.sin(theta + (deltaTheta / 2));
 				y = y + deltaArcLength * Math.cos(theta + (deltaTheta / 2));
 				theta = thetaCorrection(theta + deltaTheta);
-			//}
+			}
 
 			// this ensures that the odometer only runs once every period
 			updateEnd = System.currentTimeMillis();

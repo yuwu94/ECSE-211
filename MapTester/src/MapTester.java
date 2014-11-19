@@ -69,8 +69,8 @@ public class MapTester {
 		}
 		System.out.println(jerry.getPath().toString());
 		
-		Ghost robot = new Ghost(0,7,"N",map);
-		//robot.turn();
+		Ghost robot = new Ghost(7,5,"S",map);
+		//robot.turn()
 		
 		Localizer loc = new Localizer(map,robot);
 		loc.run();
