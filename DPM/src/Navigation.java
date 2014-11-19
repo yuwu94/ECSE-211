@@ -211,6 +211,14 @@ import java.util.ArrayList;
                             Motor.A.rotate(convertAngle(leftRadius, width, 95.5), true);
                             Motor.B.rotate(-convertAngle(rightRadius, width, 95.5), false);
             }
+            // turns the robot counterclockwise by 90 degrees
+            public void turnCCW() {
+                            Motor.A.setSpeed(ROTATE_SPEED);
+                            Motor.B.setSpeed(ROTATE_SPEED);
+     
+                            Motor.A.rotate(-convertAngle(leftRadius, width, 95.5), true);
+                            Motor.B.rotate(convertAngle(rightRadius, width, 95.5), false);
+            }
      		//method to move the robot 1 tile forward (30.24 centimeters)
             public void oneTileForward() {
                             Motor.A.setSpeed(FORWARD_SPEED);
