@@ -94,8 +94,8 @@ public class Localizer extends Thread{
 		}
 		for(Ghost g : ghosts){
 			if(g.isValid()){
-				odo.setX(g.getX());
-				odo.setY(g.getY());
+				odo.setX(g.getX()*30 + 15);
+				odo.setY(g.getY()*30 + 15);
 				if(g.getOrientation().equals("N")) {odo.setTheta(0);}
 				if(g.getOrientation().equals("S")) {odo.setTheta(Math.PI);}
 				if(g.getOrientation().equals("E")) {odo.setTheta(Math.PI/2);}

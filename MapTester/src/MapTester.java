@@ -16,7 +16,7 @@ public class MapTester {
 		map.populate();
 		if(map.getWalls() != null){
 			for(GridSquare s : map.getWalls()){
-				System.out.println(s.getX() + " , " + s.getY());
+				//System.out.println(s.getX() + " , " + s.getY());
 			}
 		}
 		
@@ -37,11 +37,22 @@ public class MapTester {
 			}
 		}
 		
-		Ghost robot = new Ghost(3,5,"N",map);
+		
+		Path testPath = new Path();
+		testPath.addSquare(new GridSquare(map,1,2,false));
+		testPath.addSquare(new GridSquare(map,1,3,false));
+		testPath.addSquare(new GridSquare(map,2,3,false));
+		System.out.println(testPath.toString());
+		
+		Pathfinder jerry = new Pathfinder(map,map.getSquare(0, 0),map.getSquare(3, 6));
+		jerry.genPath();
+		System.out.println(jerry.getPath().toString());
+		
+		Ghost robot = new Ghost(0,7,"N",map);
 		//robot.turn();
 		//System.out.println(robot.getX() + " , " + robot.getY() + " , " + robot.getOrientation() + " , " + robot.wallinFront());
 		Localizer loc = new Localizer(map,robot);
-		loc.start();
+		//loc.start();
 
 		System.out.println(loc.numValid());
 		for(Ghost goul : gs){

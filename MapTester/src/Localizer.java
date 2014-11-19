@@ -94,8 +94,8 @@ public class Localizer extends Thread{
 		}
 		for(Ghost g : ghosts){
 			if(g.isValid()){
-				System.out.println(g.getX());
-				System.out.println(g.getY());
+				System.out.println(g.getX()*30 + 15);
+				System.out.println(g.getY()*30 + 15);
 				System.out.println(g.getOrientation());
 			}
 		}
