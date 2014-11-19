@@ -100,7 +100,6 @@ public class Simon {
 		} 
 		else if(buttonChoice == Button.ID_RIGHT) {
 			display.start();
-			correction.start();
 			//nav.travelTo(new Waypoint(30,0));
 			//nav.turnTo(Math.PI/2);
 			//nav.travelTo(new Waypoint(30,30));
