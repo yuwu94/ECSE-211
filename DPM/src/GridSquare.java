@@ -15,10 +15,16 @@ public class GridSquare {
 		
 	}
 	
+	/**
+	 * For pathfinding, calling this will set the node to visited status
+	 */
 	public void visit(){
 		visited = true;
 	}
-	
+	/**
+	 * Gets whether or not the node has been visited
+	 * @return visited (true = visited)
+	 */
 	public boolean isVisited(){
 		return visited;
 	}

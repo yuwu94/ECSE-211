@@ -100,4 +100,20 @@ public class Ghost {
 			orientation = "N";
 		}
 	}
+	
+	public void turnLeft(){
+		if(orientation.equals("N")){
+			orientation = "W";
+		}
+		else if(orientation.equals("S")){
+			orientation = "E";
+		}
+		else if(orientation.equals("E")){
+			orientation = "N";
+		}
+		else if(orientation.equals("W")){
+			orientation = "S";
+		}
+	}
+	
 }

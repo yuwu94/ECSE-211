@@ -3,9 +3,11 @@ import java.util.ArrayList;
 import lejos.nxt.Sound;
 
 
-public class Localizer extends Thread{
+public class Localizer{
 	
 	boolean running;
+	
+	int gridx,gridy,turncount;
 	
 	private static final int WALL = 20;
 	
@@ -17,14 +19,14 @@ public class Localizer extends Thread{
 	
 	private ArrayList<Ghost> ghosts;
 	
-	private UltrasonicController controller;
+	private UltrasonicPoller controller;
 	
-	public Localizer(Map map,Odometer odo,Navigation nav,UltrasonicController uc){
+	public Localizer(Map map,Odometer odo,Navigation nav,UltrasonicPoller uc){
 		this.map = map;
 		running = true;
 		this.nav = nav;
 		this.controller = uc;
-		
+		ghosts = new ArrayList<Ghost>();
 		for(int i = 0; i < map.getSize(); i++){
 			for(int j = 0; j < map.getSize(); j++){
 				if(!map.getSquare(i,j).isWall()){
@@ -41,6 +43,10 @@ public class Localizer extends Thread{
 		}
 	}
 	
+	/**Gets whether or not the localizer is still running
+	 * 
+	 * @return running (true = running)
+	 */
 	public boolean isRunning(){
 		return running;
 	}
@@ -73,7 +79,7 @@ public class Localizer extends Thread{
 	
 	public void run(){
 		while(numValid() > 1){
-			if(controller.getFilteredDist() < WALL){
+			if(controller.getDist() < WALL){
 				wall();
 				nav.turnCW();
 				for(Ghost g : ghosts){
@@ -94,6 +100,8 @@ public class Localizer extends Thread{
 		}
 		for(Ghost g : ghosts){
 			if(g.isValid()){
+				gridx = g.getX();
+				gridy = g.getY();
 				odo.setX(g.getX()*30 + 15);
 				odo.setY(g.getY()*30 + 15);
 				if(g.getOrientation().equals("N")) {odo.setTheta(0);}
@@ -106,4 +114,13 @@ public class Localizer extends Thread{
 		Sound.beep();
 		running = false;
 	}
+	
+	public int getX(){
+		return gridx;
+	}
+	
+	public int getY(){
+		return gridy;
+	}
+	
 }

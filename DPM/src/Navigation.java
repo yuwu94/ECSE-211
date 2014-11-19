@@ -68,6 +68,7 @@ import java.util.ArrayList;
                     //initialize the motors acceleration
                     Motor.A.setAcceleration(3000);
                     Motor.B.setAcceleration(3000);
+                    
                    
                    
             }
@@ -225,6 +226,23 @@ import java.util.ArrayList;
      
             private static int convertAngle(double radius, double width, double angle) {
                     return convertDistance(radius, Math.PI * width * angle / 360.0);
+            }
+            
+            public void travelPath(Path p){
+            	for(Waypoint point : p.getPoints()){
+            		travelTo(point);
+            	}
+            }
+            
+            public void turnTo(Waypoint point){
+                navigating = true;
+                update();
+               
+                //get and turn to the correct heading
+                double destinationAngle = getAngle(point.getX(),point.getY());
+                turnTo(destinationAngle);
+                update();
+
             }
      
     }

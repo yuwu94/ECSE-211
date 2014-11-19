@@ -10,6 +10,7 @@ public class Localizer extends Thread{
 	
 	private static final int WALL = 20;
 	
+	int turncount;
 	
 	private Map map;
 	
@@ -20,6 +21,8 @@ public class Localizer extends Thread{
 		this.map = map;
 		running = true;
 		this.robot = robot;
+		
+		turncount = 0;
 		
 		ghosts = new ArrayList<Ghost>();
 		
@@ -69,25 +72,79 @@ public class Localizer extends Thread{
 		}
 	}
 	
+	public void wall2(){
+		for(Ghost g : ghosts){
+			if(g.wallinFront() != 2){
+				g.invalid();
+			}
+		}
+	}
+	
 	public void run(){
 		while(numValid() > 1){
 			System.out.println(robot.getX() + " , " + robot.getY() + " , " + robot.getOrientation() + " , " + robot.wallinFront());
 			//System.out.println(numValid());
 			if(robot.wallinFront() == 1){
 				wall();
-				robot.turn();
-				for(Ghost g : ghosts){
-					if(g.isValid()){
-						g.turn();
+				if(turncount < 0){
+					//turncount++;
+					robot.turnLeft();
+					for(Ghost g : ghosts){
+						if(g.isValid()){
+							g.turnLeft();
+						}
+					}
+				}
+				else{
+					
+					robot.turn();
+					for(Ghost g : ghosts){
+						if(g.isValid()){
+							g.turn();
+						}
+					}
+				}
+
+			}
+			else if(robot.wallinFront() == 2){
+				wall2();
+				if(turncount >= 3){
+					turncount = 0;
+					robot.turnLeft();
+					for(Ghost g : ghosts){
+						if(g.isValid()){
+							g.turnLeft();
+						}
+					}
+				}
+				else{
+					turncount++;
+					robot.move();
+					for(Ghost g : ghosts){
+						if(g.isValid()){
+							g.move();
+						}
 					}
 				}
 			}
 			else{
 				noWall();
-				robot.move();
-				for(Ghost g : ghosts){
-					if(g.isValid()){
-						g.move();
+				if(turncount >= 3){
+					turncount = 0;
+					robot.turnLeft();
+					for(Ghost g : ghosts){
+						if(g.isValid()){
+							g.turnLeft();
+						}
+					}
+				}
+				else{
+					turncount++;
+					robot.move();
+					for(Ghost g : ghosts){
+						if(g.isValid()){
+							g.move();
+						}
 					}
 				}
 			}

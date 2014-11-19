@@ -11,6 +11,19 @@ public class Simon {
 	public static void main(String[] args) {
 		int buttonChoice;
 		
+
+		
+		boolean[][] walls1 = {{false,false,false,false,false,true,false,false},{false,false,false,false,false,false,false,true},{false,false,false,false,true,false,true,true}
+		,{false,false,false,false,false,true,false,false},{false,true,true,true,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,true,false,false,true,false,false},
+		{true,false,true,true,false,false,true,false}};
+	
+		boolean[][] walls2 = {{false,false,false,false,false,true,false,false},{false,false,false,false,false,false,false,true},{false,false,false,false,true,false,true,true}
+		,{false,false,false,false,false,true,false,false},{false,true,true,true,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,true,false,false,true,false,false},
+		{true,false,true,true,false,false,true,false}};
+		
+		
+		
+		
 		//Initialize EVERYTHING HERE DAMMIT
 		
 		//Motor/Driver initialization
@@ -37,10 +50,14 @@ public class Simon {
 		//Ultrasonic Initialization
 		UltrasonicSensor us = new UltrasonicSensor(SensorPort.S1);
 		UltrasonicPoller usPoller = new UltrasonicPoller(us);
+		usPoller.start();
 		UltrasonicController usController = new UltrasonicController(usPoller);
 		
 		//Initialize map, localization, and navigation.
 		Navigation nav = new Navigation(0,0,odometer, wheels);
+		
+
+		
 		
 		//Start all the threads
 		rightPoll.start();
@@ -55,19 +72,33 @@ public class Simon {
 			// ask the user whether the motors should drive in a square or float
 			LCD.drawString("< Left | Right >", 0, 0);
 			LCD.drawString("       |        ", 0, 1);
-			LCD.drawString("  Claw | Drive  ", 0, 2);
+			LCD.drawString("  Path | Drive  ", 0, 2);
 			LCD.drawString("       |        ", 0, 3);
 			LCD.drawString("       |        ", 0, 4);
 
 			buttonChoice = Button.waitForAnyPress();
 		} while (buttonChoice != Button.ID_LEFT
-				&& buttonChoice != Button.ID_RIGHT);
+				&& buttonChoice != Button.ID_RIGHT && buttonChoice != Button.ID_ENTER);
 
 		if (buttonChoice == Button.ID_LEFT) {
-			claw.close();
-			claw.open();
+			//claw.close();
+			//claw.open();
+			
+			odometer.setX(15);
+			odometer.setY(15);
+			correction.start();
+			Path testPath = new Path();
+//			testPath.addSquare(new GridSquare(map,0,0,false));
+//			testPath.addSquare(new GridSquare(map,1,0,false));
+//			testPath.addSquare(new GridSquare(map,1,1,false));
+//			testPath.addSquare(new GridSquare(map,2,1,false));
+//			testPath.addSquare(new GridSquare(map,1,3,false));
+//			testPath.addSquare(new GridSquare(map,2,3,false));
+			
+			nav.travelPath(testPath);
 
-		} else {
+		} 
+		else if(buttonChoice == Button.ID_RIGHT) {
 			display.start();
 			correction.start();
 			//nav.travelTo(new Waypoint(30,0));
@@ -80,6 +111,15 @@ public class Simon {
 			//nav.travelTo(0, 30);
 			//nav.waypoints.push(new Waypoint(10,0));
 			
+		}
+		else{
+			Map map = new Map(8,1);
+			map.addWalls(walls1);
+			map.populate();
+			display.start();
+			Localizer localizer = new Localizer(map,odometer,nav,usPoller);
+			localizer.run();
+
 		}
 		
 		while (Button.waitForAnyPress() != Button.ID_ESCAPE);
